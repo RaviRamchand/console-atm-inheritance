@@ -1,7 +1,7 @@
 package assigment2;
 
 public class SavingsAccount extends Account{
-	//Cannot be overdrawn 
+	//SavingsAccount cannot be overdrawn and has a interest rate of 3% 
 	
 	public SavingsAccount() {}
 	
@@ -18,5 +18,9 @@ public class SavingsAccount extends Account{
 		
 		str = "Your new balance is: " +newAmount;
 		return str;
+	}
+	
+	public double annualInterestRate() {
+		return this._annualInterestRate = 3;
 	}
 }

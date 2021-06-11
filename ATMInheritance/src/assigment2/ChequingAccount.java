@@ -1,10 +1,7 @@
 package assigment2;
 
 public class ChequingAccount extends Account{
-	//Overdraft limit of $500
-	//Annual Interest Rate 1%
-	
-	
+	//ChequintAccount has an Overdraft limit of $-500 and an Annual Interest Rate of 1%
 	
 	public ChequingAccount() {}
 
@@ -16,12 +13,13 @@ public class ChequingAccount extends Account{
 	public String withdraw(double amount) {
 		double newAmount;
 		String str;
+		int overdraft = -500;
 		
-		//Check if the balance - the amount is less than or equal to 500 
-		if(this._balance - amount <= -500) {
+		//Check if the balance - the amount is <= -500(overdraft) 
+		if(this._balance - amount <= overdraft) {
 			str = "You dont have enough money to withdraw";
 		}
-		//If not minus away bai
+		//If balance - amount > overdraft calculate new amount
 		else {
 			newAmount = this._balance - amount;
 			this._balance = newAmount;
@@ -29,6 +27,10 @@ public class ChequingAccount extends Account{
 		}
 		return str;
 		
+	}
+	
+	public double annualInterestRate() {
+		return this._annualInterestRate = 1;
 	}
 	
 
