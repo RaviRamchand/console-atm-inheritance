@@ -18,12 +18,15 @@ public class ATM {
 		//102's balance
 		arrId[3] = 1000;
 		
-		atmObject.menu(atmObject, input, arrId);	
+		atmObject.menu(input, arrId);	
 
 		//End of main method
 	}
 	
-	public void menu(ATM atmObject, Scanner input, double[] arrId) {	
+	//Main menu
+	public void menu(Scanner input, double[] arrId) {	
+		
+		ATM atmObject = new ATM();
 		
 		System.out.println("First time: "+Arrays.toString(arrId));
 		System.out.println("-------------------");
@@ -58,6 +61,7 @@ public class ATM {
 		
 	}
 
+	//Method to create an account 
 	public void createAccount(Scanner input, double[] arrId) {
 		double initialBalance;
 		
@@ -95,11 +99,12 @@ public class ATM {
 			}
 		}
 		
-		menu(null, input, arrId);
+		//Go back to the menu method
+		menu(input, arrId);
 		//End of creatAccount method
 	}
 
-	
+	//Account info method
 	public void accountInfo(Scanner input, double[] arrId) {
 		int id; 
 		System.out.println("Enter your Id: ");
@@ -110,6 +115,7 @@ public class ATM {
 				System.out.println("Account Id: " +id);
 			}
 		}
+		
 	}
 
 
