@@ -96,7 +96,8 @@ public class ATM {
 		for(int i = 0; i<arrId.length; i++) {
 			if(arrId[i] == id) {
 				arrId[i+1] = initialBalance;
-			}
+				
+			}			
 		}
 		
 		//Go back to the menu method
@@ -110,11 +111,17 @@ public class ATM {
 		System.out.println("Enter your Id: ");
 		id = input.nextInt();
 		
+		//login to the account
 		for(int i = 0; i<arrId.length; i++) {
 			if(arrId[i] == id) {
 				System.out.println("Account Id: " +id);
+				System.out.println("Annual Interest Rate: ");
 			}
-		}
+			else {
+				System.out.println("You need to login first");
+				main(null);
+			}
+		}		
 		
 	}
 
