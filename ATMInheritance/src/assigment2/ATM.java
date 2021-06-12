@@ -5,13 +5,27 @@ import java.util.Scanner;
 public class ATM {
 	public static void main(String []args) {		
 		Scanner input = new Scanner(System.in);
-		int[] arrId = new int[10];
+		double[] arrId = new double[10];
+		ATM atmObject = new ATM();
 
 		//Already existing account ids
-		arrId[0] = 101;
-		arrId[1] = 102;
+		arrId[0] = 101;		
+		arrId[2] = 102;
+		
+		//101's balance
+		arrId[1] = 500;
+		
+		//102's balance
+		arrId[3] = 1000;
+		
+		atmObject.menu(atmObject, input, arrId);	
 
-
+		//End of main method
+	}
+	
+	public void menu(ATM atmObject, Scanner input, double[] arrId) {	
+		
+		System.out.println("First time: "+Arrays.toString(arrId));
 		System.out.println("-------------------");
 		System.out.println("Main Menu");
 		System.out.println("-------------------");
@@ -26,11 +40,12 @@ public class ATM {
 		int choice = input.nextInt();
 
 		switch(choice) {
-		case 1:
-			ATM atmObject = new ATM();
+		case 1:			
 			atmObject.createAccount(input, arrId);
 			break;
 		case 2:
+			atmObject.accountInfo(input, arrId);
+			break;
 		case 3:
 		case 4:
 		case 5:
@@ -40,12 +55,12 @@ public class ATM {
 		System.out.println("array ids: ");
 
 		System.out.println(Arrays.toString(arrId));
-
-
-		//End of main method
+		
 	}
 
-	public void createAccount(Scanner input, int[] arrId) {		
+	public void createAccount(Scanner input, double[] arrId) {
+		double initialBalance;
+		
 		System.out.println(" ");
 		System.out.println("---------------");
 		System.out.println("Create Account");
@@ -55,22 +70,47 @@ public class ATM {
 
 		//loop through arrId to see if id already exists
 		for(int i = 0; i<arrId.length; i++) {
-			if(arrId[i] == id) {
-				System.out.println("This id already exists");
-				break;
+			
+			//loops until the user enters an ID that does'nt exist
+			while(arrId[i] == id) {
+				System.out.print("Please enter another ID: ");
+				id = input.nextInt();
 			}
-			else {
-				System.out.println("aight");
+
+			if(arrId[i] != id) {
 				if(arrId[i] == 0) {
 					arrId[i] = id;
 					break;
 				}				
 			}
 		}
-
+		
+		System.out.print("Enter your initial balance: ");
+		initialBalance = input.nextDouble();
+		
+		//Put the balance the index after the id
+		for(int i = 0; i<arrId.length; i++) {
+			if(arrId[i] == id) {
+				arrId[i+1] = initialBalance;
+			}
+		}
+		
+		menu(null, input, arrId);
 		//End of creatAccount method
 	}
 
+	
+	public void accountInfo(Scanner input, double[] arrId) {
+		int id; 
+		System.out.println("Enter your Id: ");
+		id = input.nextInt();
+		
+		for(int i = 0; i<arrId.length; i++) {
+			if(arrId[i] == id) {
+				System.out.println("Account Id: " +id);
+			}
+		}
+	}
 
 
 	//End of ATM class
