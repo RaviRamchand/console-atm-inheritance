@@ -3,31 +3,26 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class ATM {
-	public static void main(String []args) {		
-		Scanner input = new Scanner(System.in);
-		double[] arrId = new double[10];
+	public static void main(String []args) {
 		ATM atmObject = new ATM();
+		Account[] arrId = new Account[5];
+		int id = 101;
 
-		//Already existing account ids
-		arrId[0] = 101;		
-		arrId[2] = 102;
-		
-		//101's balance
-		arrId[1] = 500;
-		
-		//102's balance
-		arrId[3] = 1000;
-		
-		atmObject.menu(input, arrId);	
+		for(int i = 0; i<arrId.length; i++) {
+			arrId[i] = new Account();
+			arrId[i].setId(id);
+		}		
+
+		atmObject.menu(arrId, atmObject);	
 
 		//End of main method
+
 	}
-	
+
 	//Main menu
-	public void menu(Scanner input, double[] arrId) {	
-		
-		ATM atmObject = new ATM();
-		
+	public void menu(Account[] arrId, ATM atmObject) {		
+		Scanner input = new Scanner(System.in);
+
 		System.out.println("First time: "+Arrays.toString(arrId));
 		System.out.println("-------------------");
 		System.out.println("Main Menu");
@@ -46,9 +41,9 @@ public class ATM {
 		case 1:			
 			atmObject.createAccount(input, arrId);
 			break;
-		case 2:
-			atmObject.accountInfo(input, arrId);
-			break;
+			//		case 2:
+			//			atmObject.accountInfo(input, arrId);
+			//			break;
 		case 3:
 		case 4:
 		case 5:
@@ -58,13 +53,13 @@ public class ATM {
 		System.out.println("array ids: ");
 
 		System.out.println(Arrays.toString(arrId));
-		
+
 	}
 
 	//Method to create an account 
-	public void createAccount(Scanner input, double[] arrId) {
+	public void createAccount(Scanner input, Account[] arrId) {
 		double initialBalance;
-		
+
 		System.out.println(" ");
 		System.out.println("---------------");
 		System.out.println("Create Account");
@@ -74,55 +69,61 @@ public class ATM {
 
 		//loop through arrId to see if id already exists
 		for(int i = 0; i<arrId.length; i++) {
-			
+
 			//loops until the user enters an ID that does'nt exist
-			while(arrId[i] == id) {
+			while(arrId[i] != null && arrId[i].getId() == id) {
 				System.out.print("Please enter another ID: ");
-				id = input.nextInt();
+				id = input.nextInt();	
 			}
 
-			if(arrId[i] != id) {
-				if(arrId[i] == 0) {
-					arrId[i] = id;
-					break;
-				}				
-			}
-		}
-		
-		System.out.print("Enter your initial balance: ");
-		initialBalance = input.nextDouble();
-		
-		//Put the balance the index after the id
-		for(int i = 0; i<arrId.length; i++) {
-			if(arrId[i] == id) {
-				arrId[i+1] = initialBalance;
-				
-			}			
-		}
-		
-		//Go back to the menu method
-		menu(input, arrId);
-		//End of creatAccount method
-	}
+			//If users wanted Id doesn't exist, add to the array
+			if(arrId[i].getId() != id) {
+				arrId[i] = new Account();				
+				arrId[i+i].setId(id);
+				break;
 
-	//Account info method
-	public void accountInfo(Scanner input, double[] arrId) {
-		int id; 
-		System.out.println("Enter your Id: ");
-		id = input.nextInt();
-		
-		//login to the account
-		for(int i = 0; i<arrId.length; i++) {
-			if(arrId[i] == id) {
-				System.out.println("Account Id: " +id);
-				System.out.println("Annual Interest Rate: ");
-			}
-			else {
-				System.out.println("You need to login first");
-				main(null);
-			}
-		}		
-		
+			}				
+
+			//End of for loop
+		}
+
+		System.out.println(Arrays.toString(arrId));
+
+
+		//		System.out.print("Enter your initial balance: ");
+		//		initialBalance = input.nextDouble();
+		//
+		//		//Put the balance the index after the id
+		//		for(int i = 0; i<arrId.length; i++) {
+		//			if(arrId[i] == id) {
+		//				arrId[i+1] = initialBalance;
+		//
+		//			}			
+		//		}
+		//
+		//		//Go back to the menu method
+		//		menu(arrId, atmObject);
+		//		//End of creatAccount method
+		//	}
+		//
+		//	//Account info method
+		//	public void accountInfo(Scanner input, Account[] arrId) {
+		//		int id; 
+		//		System.out.println("Enter your Id: ");
+		//		id = input.nextInt();
+		//
+		//		//login to the account
+		//		for(int i = 0; i<arrId.length; i++) {
+		//			if(arrId[i] == id) {
+		//				System.out.println("Account Id: " +id);
+		//				System.out.println("Annual Interest Rate: ");
+		//			}
+		//			else {
+		//				System.out.println("You need to login first");
+		//				main(null);
+		//			}
+		//		}		
+
 	}
 
 
