@@ -72,6 +72,11 @@ public class Account {
 		newInterest = this._balance * ((this._annualInterestRate/12)/100);
 		return newInterest;
 	}
+	
+	@Override
+	public String toString() {
+		return getId() +"";
+	}
 
 	//End of Account class
 }
