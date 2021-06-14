@@ -75,7 +75,7 @@ public class Account {
 	
 	@Override
 	public String toString() {
-		return getId() +"";
+		return getId() +"" +getBalance();
 	}
 
 	//End of Account class
