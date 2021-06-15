@@ -7,8 +7,8 @@ public class ATM {
 		//Create an ATM object
 		ATM atmObject = new ATM();
 
-		//Create an account array to hold 5 account ids
-		Account[] arrId = new Account[5];
+		//Create an account array to hold 10 elements
+		Account[] arrId = new Account[10];
 		int id = 0;
 
 		//Fill the array with id 0 so it can later be accessed and writen over
@@ -67,6 +67,7 @@ public class ATM {
 	//Method to create an account 
 	public void createAccount(Scanner input, Account[] arrId, ATM atmObject) {
 		double initialBalance;
+		int accountType;
 
 		System.out.println(" ");
 		System.out.println("---------------");
@@ -84,22 +85,33 @@ public class ATM {
 				id = input.nextInt();	
 			}
 
+			//TODO Fix the second users account type in the array 
+			
 			//If users wanted Id doesn't exist and arrid[i] = 0, add to the array
-			if(arrId[i].getId() != id && arrId[i].getId() == 0) {
+			if(arrId[i].getId() != id && arrId[i].getId() == 0 && arrId[i].getBalance() == 0 && arrId[i].getAccountType() == 0) {
 				System.out.print("Enter your initial balance: ");
 				initialBalance = input.nextDouble();
 				arrId[i] = new Account();				
 				arrId[i].setId(id);
 				arrId[i+1].setBalance(initialBalance);
+				System.out.print("Enter the type of account you want: (1=Savings/2=Chequings)");
+				accountType = input.nextInt();	
+				
+				if(accountType == 1 && arrId[i+2].getId() == 0 && arrId[i].getBalance() == 0 && arrId[i].getAccountType() == 0) {
+					arrId[i+2].setAccountType(1);
+				}
+				else if(accountType == 2 && arrId[i+2].getId() == 0 && arrId[i].getBalance() == 0 && arrId[i].getAccountType() == 0) {
+					arrId[i+2].setAccountType(2);
+				}
+			
 				break;
 
-			}			
-			
-			//TODO allow the user to input the type of account they want
+			}				
 
 			//End of for loop
 		}
-
+		
+		
 		System.out.println(Arrays.toString(arrId));
 
 		//Go back to the menu method
@@ -117,14 +129,36 @@ public class ATM {
 		for(int i = 0; i<arrId.length; i++) {
 			if(arrId[i].getId() == id) {
 				System.out.println("Account Id: " +id);
-				System.out.println("Annual Interest Rate: " +arrId[i].getAnnualInterestRate());
+				System.out.println("Balance: " +arrId[i+1].getBalance());
+				System.out.print("Account Type: ");	
+				
+				if(arrId[i+2].getAccountType() == 1) {
+					System.out.println("Savings");					
+				}
+				
+				else if(arrId[i+2].getAccountType() == 2) {
+					System.out.println("Chequings");					
+				}
+				
+				System.out.print("Annual Interest Rate: ");
+				
+				if(arrId[i+2].getAccountType() == 1) {					
+					SavingsAccount sa = new SavingsAccount(id, arrId[i+1].getBalance());
+					System.out.println(sa.annualInterestRate() +"%");
+				}
+				
+				else if(arrId[i+2].getAccountType() == 2) {					
+					ChequingAccount ca = new ChequingAccount(id, arrId[i+1].getBalance());
+					System.out.println(ca.annualInterestRate()+"%");
+				}
+				System.out.println(" ");
 				break;
 			}
-			else {
-				System.out.println("You need to login first");
-				menu(arrId, atmObject);
-			}
-		}		
+			
+			//End of for loop
+		}
+		
+		menu(arrId, atmObject);
 
 	}
 
