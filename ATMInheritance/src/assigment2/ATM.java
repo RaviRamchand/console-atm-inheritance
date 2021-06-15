@@ -7,8 +7,8 @@ public class ATM {
 		//Create an ATM object
 		ATM atmObject = new ATM();
 
-		//Create an account array to hold 10 elements
-		Account[] arrId = new Account[10];
+		//Create an account array to hold 9 elements
+		Account[] arrId = new Account[9];
 		int id = 0;
 
 		//Fill the array with id 0 so it can later be accessed and writen over
@@ -30,7 +30,6 @@ public class ATM {
 		Scanner input = new Scanner(System.in);
 
 		//Menu options
-		System.out.println("First time: "+Arrays.toString(arrId));
 		System.out.println("-------------------");
 		System.out.println("Main Menu");
 		System.out.println("-------------------");
@@ -59,12 +58,10 @@ public class ATM {
 			atmObject.deposits(input, arrId, atmObject);
 			break;
 		case 5:
-			break;
-		}		
+			System.out.println("Thank you");
+			System.exit(0);
+		}
 
-		System.out.println("array ids: ");
-
-		System.out.println(Arrays.toString(arrId));
 
 	}
 
@@ -88,7 +85,7 @@ public class ATM {
 				System.out.print("Please enter another ID: ");
 				id = input.nextInt();	
 			}
-			
+
 			//If users wanted Id doesn't exist and arrid[i] = 0, add to the array
 			if(arrId[i].getId() != id && arrId[i].getId() == 0 && arrId[i].getBalance() == 0 && arrId[i].getAccountType() == 0) {
 				System.out.print("Enter your initial balance: ");
@@ -96,16 +93,16 @@ public class ATM {
 				arrId[i] = new Account();				
 				arrId[i].setId(id);
 				arrId[i+1].setBalance(initialBalance);
-				System.out.print("Enter the type of account you want: (1=Savings/2=Chequings)");
+				System.out.print("Enter the type of account you want: (1=Savings/2=Chequings): ");
 				accountType = input.nextInt();	
-				
+
 				if(accountType == 1) {
 					arrId[i+2].setAccountType(1);
 				}
 				else if(accountType == 2) {
 					arrId[i+2].setAccountType(2);
 				}
-			
+
 				break;
 
 			}				
@@ -113,11 +110,9 @@ public class ATM {
 			//End of for loop
 		}
 		
-		
-		System.out.println(Arrays.toString(arrId));
-
 		//Go back to the menu method
 		menu(arrId, atmObject);
+		
 		//End of creatAccount method
 	}
 
@@ -130,92 +125,130 @@ public class ATM {
 		//Login to the account
 		for(int i = 0; i<arrId.length; i++) {
 			if(arrId[i].getId() == id) {
+				System.out.println("");
+				System.out.println("-------------");
+				System.out.println("Account Info");
+				System.out.println("-------------");
 				System.out.println("Account Id: " +id);
 				System.out.println("Balance: " +arrId[i+1].getBalance());
 				System.out.print("Account Type: ");	
-				
+
 				if(arrId[i+2].getAccountType() == 1) {
 					System.out.println("Savings");					
 				}
-				
+
 				else if(arrId[i+2].getAccountType() == 2) {
 					System.out.println("Chequings");					
 				}
-				
+
 				System.out.print("Annual Interest Rate: ");
-				
+
 				if(arrId[i+2].getAccountType() == 1) {					
 					SavingsAccount sa = new SavingsAccount(id, arrId[i+1].getBalance());
 					System.out.println(sa.annualInterestRate() +"%");
 				}
-				
+
 				else if(arrId[i+2].getAccountType() == 2) {					
 					ChequingAccount ca = new ChequingAccount(id, arrId[i+1].getBalance());
 					System.out.println(ca.annualInterestRate()+"%");
-				}
+				}				
 				System.out.println(" ");
 				break;
 			}
-			
+
 			//End of for loop
 		}
 		
+		//Go back to the menu method
 		menu(arrId, atmObject);
 
 	}
-	
+
 	//Withdraw method
 	public void withdrawal(Scanner input, Account[] arrId, ATM atmObject) {
 		int id;
 		double withdrawAmount;
 		double currentAmount;
 		double newAmount;
-		
+
 		System.out.print("Please enter your ID: ");
 		id = input.nextInt();
-		
+
 		//Find the users id
 		for(int i = 0; i<arrId.length; i++) {
-			
+
 			//If user id matches an array element
 			if(arrId[i].getId() == id) {
 				System.out.print("Enter the amount you'd like to withdraw: ");
 				withdrawAmount = input.nextDouble();
+				//Save the balance in the array to currentAmount
 				currentAmount = arrId[i+1].getBalance();
-				
+
 				//If account type is 1(Savings)
 				if(arrId[i+2].getAccountType() == 1) {
 					SavingsAccount sa = new SavingsAccount(id, currentAmount);					
-					 newAmount = sa.withdraw(withdrawAmount);
-					 arrId[i+1].setBalance(newAmount);
-					 System.out.println("Withdraw successful! new amount: $" +newAmount);
+					newAmount = sa.withdraw(withdrawAmount);
+					arrId[i+1].setBalance(newAmount);
+					System.out.println("Withdraw successful! new amount: $" +newAmount);
 				}
-				
+
 				//If account type is 2(Chequings)
 				else if(arrId[i+2].getAccountType() == 2) {
 					ChequingAccount ca = new ChequingAccount(id, currentAmount);
 					newAmount = ca.withdraw(withdrawAmount);
-					
+
 					//If user doesn't have enough money to make the withdraw
 					if(newAmount == 989898989) {
 						System.out.println("Not enough in your account to withdraw $" +withdrawAmount);
 					}
 					else {
 						arrId[i+1].setBalance(newAmount);
-						 System.out.println("Withdraw successful! new amount: $" +newAmount);
+						System.out.println("Withdraw successful! new amount: $" +newAmount);
 					}
 				}
 			}
-		
+
 			//End of for loop
 		}
 		
+		//Go back to the menu method
+		menu(arrId, atmObject);
+
 		//End of withdrawal method
 	}
-	
+
 	//Deposit method
 	public void deposits(Scanner input, Account[] arrId, ATM atmObject) {
-		
+		int id;
+		double depositAmount;
+		double newAmount;
+
+		System.out.print("Please enter your Id: ");
+		id = input.nextInt();
+
+		for(int i = 0; i<arrId.length; i++) {
+
+			if(arrId[i].getId() == id) {
+				System.out.print("Enter the amount you'd like to deposit: ");
+				depositAmount = input.nextDouble();	
+				
+				double currentAmount = arrId[i+1].getBalance();
+
+				//Create account object
+				Account account = new Account(id, currentAmount);
+
+				System.out.println("Deposit amount: " +depositAmount);
+				//Use account to access the deposit method and save sum in newAmount
+				newAmount = account.deposit(depositAmount);
+				System.out.println("New amount is: " +newAmount);
+				//Save the newAmount to the array
+				arrId[i+1].setBalance(newAmount);
+			}
+		}
+
+		//Go back to the menu method
+		menu(arrId, atmObject);
+
 		//End of deposits method
 	}
 
