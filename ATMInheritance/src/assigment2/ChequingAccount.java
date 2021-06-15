@@ -10,22 +10,19 @@ public class ChequingAccount extends Account{
 	}
 
 	@Override
-	public String withdraw(double amount) {
+	public double withdraw(double amount) {
 		double newAmount;
-		String str;
 		int overdraft = -500;
 		
 		//Check if the balance - the amount is <= -500(overdraft) 
 		if(this._balance - amount <= overdraft) {
-			str = "You dont have enough money to withdraw";
+			newAmount = 989898989;
 		}
 		//If balance - amount > overdraft calculate new amount
 		else {
 			newAmount = this._balance - amount;
-			this._balance = newAmount;
-			str = "Your new balance is: $" +newAmount;
 		}
-		return str;
+		return newAmount;
 		
 	}
 	

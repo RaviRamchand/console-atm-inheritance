@@ -10,14 +10,11 @@ public class SavingsAccount extends Account{
 	}
 	
 	@Override
-	public String withdraw(double amount) {
+	public double withdraw(double amount) {
 		double newAmount;
-		String str;
-		newAmount = this._balance - amount;
-		this._balance = newAmount;
-		
-		str = "Your new balance is: " +newAmount;
-		return str;
+		newAmount = this._balance - amount;		
+	
+		return newAmount;
 	}
 	
 	public double annualInterestRate() {

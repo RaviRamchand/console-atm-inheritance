@@ -64,16 +64,13 @@ public class Account {
 		return this._balance = this._balance + amount;
 	}
 
-	public String withdraw(double amount) {
-		String str;
+	public double withdraw(double amount) {
 		double newAmount = 0;
 		if(this._balance> amount) {
 			newAmount = this._balance -= amount;
 		}		
-
-		str = "Your new amount is :" +newAmount;
-		this._balance = newAmount;
-		return str;
+		
+		return newAmount;
 	}
 
 	public double monthlyInterest() {
