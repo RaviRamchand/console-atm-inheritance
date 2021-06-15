@@ -18,16 +18,13 @@ In this demonstration, the first account created, 101 will have a savings accoun
 ![102 Creation](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/createaccount2.PNG?raw=true)
 
 ### Account Info 
-![101 Account Info](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/accountInfo1.PNG?raw=true)
-![102 Account Info](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/accountInfo2.PNG?raw=true)
+![101 Account Info](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/accountInfo1.PNG?raw=true) ![102 Account Info](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/accountInfo2.PNG?raw=true)
 
 ### Withdraw
-![101 Withdraw](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/withdraw1.PNG?raw=true)
-![101 Withdraw](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/withdraw2.PNG?raw=true)
+![101 Withdraw](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/withdraw1.PNG?raw=true) ![102 Withdraw](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/withdraw2.PNG?raw=true)
 
 ### Deposit
-![101 Deposit](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/deposit1.PNG?raw=true)
-![102 Deposit](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/deposit2.PNG?raw=true)
+![101 Deposit](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/deposit1.PNG?raw=true) ![102 Deposit](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/deposit2.PNG?raw=true)
 
 ### End
 ![101 Deposit](https://github.com/Tripl3R/console-atm-inheritance/blob/master/pictures/end.PNG?raw=true)
