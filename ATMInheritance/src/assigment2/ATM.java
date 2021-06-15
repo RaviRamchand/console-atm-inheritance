@@ -53,7 +53,11 @@ public class ATM {
 			atmObject.accountInfo(input, arrId, atmObject);
 			break;
 		case 3:
+			atmObject.withdrawal(input, arrId, atmObject);
+			break;
 		case 4:
+			atmObject.deposits(input, arrId, atmObject);
+			break;
 		case 5:
 			break;
 		}		
@@ -84,8 +88,6 @@ public class ATM {
 				System.out.print("Please enter another ID: ");
 				id = input.nextInt();	
 			}
-
-			//TODO Fix the second users account type in the array 
 			
 			//If users wanted Id doesn't exist and arrid[i] = 0, add to the array
 			if(arrId[i].getId() != id && arrId[i].getId() == 0 && arrId[i].getBalance() == 0 && arrId[i].getAccountType() == 0) {
@@ -97,10 +99,10 @@ public class ATM {
 				System.out.print("Enter the type of account you want: (1=Savings/2=Chequings)");
 				accountType = input.nextInt();	
 				
-				if(accountType == 1 && arrId[i+2].getId() == 0 && arrId[i].getBalance() == 0 && arrId[i].getAccountType() == 0) {
+				if(accountType == 1) {
 					arrId[i+2].setAccountType(1);
 				}
-				else if(accountType == 2 && arrId[i+2].getId() == 0 && arrId[i].getBalance() == 0 && arrId[i].getAccountType() == 0) {
+				else if(accountType == 2) {
 					arrId[i+2].setAccountType(2);
 				}
 			
@@ -160,6 +162,61 @@ public class ATM {
 		
 		menu(arrId, atmObject);
 
+	}
+	
+	//Withdraw method
+	public void withdrawal(Scanner input, Account[] arrId, ATM atmObject) {
+		int id;
+		double withdrawAmount;
+		double currentAmount;
+		double newAmount;
+		
+		System.out.print("Please enter your ID: ");
+		id = input.nextInt();
+		
+		//Find the users id
+		for(int i = 0; i<arrId.length; i++) {
+			
+			//If user id matches an array element
+			if(arrId[i].getId() == id) {
+				System.out.print("Enter the amount you'd like to withdraw: ");
+				withdrawAmount = input.nextDouble();
+				currentAmount = arrId[i+1].getBalance();
+				
+				//If account type is 1(Savings)
+				if(arrId[i+2].getAccountType() == 1) {
+					SavingsAccount sa = new SavingsAccount(id, currentAmount);					
+					 newAmount = sa.withdraw(withdrawAmount);
+					 arrId[i+1].setBalance(newAmount);
+					 System.out.println("Withdraw successful! new amount: $" +newAmount);
+				}
+				
+				//If account type is 2(Chequings)
+				else if(arrId[i+2].getAccountType() == 2) {
+					ChequingAccount ca = new ChequingAccount(id, currentAmount);
+					newAmount = ca.withdraw(withdrawAmount);
+					
+					//If user doesn't have enough money to make the withdraw
+					if(newAmount == 989898989) {
+						System.out.println("Not enough in your account to withdraw $" +withdrawAmount);
+					}
+					else {
+						arrId[i+1].setBalance(newAmount);
+						 System.out.println("Withdraw successful! new amount: $" +newAmount);
+					}
+				}
+			}
+		
+			//End of for loop
+		}
+		
+		//End of withdrawal method
+	}
+	
+	//Deposit method
+	public void deposits(Scanner input, Account[] arrId, ATM atmObject) {
+		
+		//End of deposits method
 	}
 
 
