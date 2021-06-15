@@ -6,6 +6,7 @@ public class Account {
 	protected int _id;
 	protected double _balance;
 	protected double _annualInterestRate;
+	protected int _accountType;
 
 	//No-arg constructor
 	public Account() {}
@@ -49,6 +50,14 @@ public class Account {
 	public void setAnnualInterestRate(double _annualInterestRate) {
 		this._annualInterestRate = _annualInterestRate;
 	}
+	
+	public void setAccountType(int type) {
+		this._accountType = type;
+	}
+	
+	public int getAccountType() {
+		return _accountType;
+	}
 
 	//Methods 
 	public double deposit(double amount) {
@@ -75,7 +84,7 @@ public class Account {
 	
 	@Override
 	public String toString() {
-		return getId() +"" +getBalance();
+		return getId() +"" +getBalance() +"" +getAccountType();
 	}
 
 	//End of Account class
